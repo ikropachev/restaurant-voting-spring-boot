@@ -24,3 +24,5 @@ Login information:
 * user@gmail.com:user - sign in like regular user
 
 [Swagger REST API](http://localhost:8080/swagger-ui.html)
+
+Based on open course [BootJava](https://javaops.ru/view/bootjava) by [JavaOps](https://javaops.ru/)
