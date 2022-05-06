@@ -8,12 +8,11 @@
         <version>2.6.7</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>ru.javaops</groupId>
-    <artifactId>bootjava</artifactId>
+    <groupId>org.ikropachev</groupId>
+    <artifactId>restaurantvotingspringboot</artifactId>
     <version>1.0</version>
-    <name>BootJava</name>
-    <description>Spring Boot 2.x HATEOAS application (BootJava)</description>
-    <url>https://javaops.ru/view/bootjava</url>
+    <name>RestaurantVotingSpringBoot</name>
+    <description>Spring Boot 2.x HATEOAS application</description>
 
     <properties>
         <java.version>17</java.version>
