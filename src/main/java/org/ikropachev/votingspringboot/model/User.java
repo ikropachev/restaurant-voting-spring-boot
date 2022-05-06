@@ -1,7 +1,10 @@
 package org.ikropachev.votingspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.util.CollectionUtils;
@@ -25,7 +28,6 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString(callSuper = true, exclude = {"password"})
 public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -33,13 +35,13 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 128)
     @NoHtml   // https://stackoverflow.com/questions/17480809
     private String email;
 
     @Column(name = "password", nullable = false)
     @NotBlank
-    @Size(min = 5, max = 100)
+    @Size(max = 256)
     // https://stackoverflow.com/a/12505165/548473
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -53,7 +55,7 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     private Date registered = new Date();
 
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_roles",
+    @CollectionTable(name = "user_role",
             joinColumns = @JoinColumn(name = "user_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "role"}, name = "uk_user_roles"))
     @Column(name = "role")
@@ -81,5 +83,10 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = CollectionUtils.isEmpty(roles) ? EnumSet.noneOf(Role.class) : EnumSet.copyOf(roles);
+    }
+
+    @Override
+    public String toString() {
+        return "User:" + id + '[' + email + ']';
     }
 }

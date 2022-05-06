@@ -1,9 +1,8 @@
 package org.ikropachev.votingspringboot.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.ikropachev.votingspringboot.model.User;
-import org.ikropachev.votingspringboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,10 +17,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.ikropachev.votingspringboot.model.Role;
 import org.ikropachev.votingspringboot.model.User;
 import org.ikropachev.votingspringboot.repository.UserRepository;
-import org.ikropachev.votingspringboot.web.user.AuthUser;
-import static org.ikropachev.votingspringboot.util.UserUtil.PASSWORD_ENCODER;
+import org.ikropachev.votingspringboot.util.JsonUtil;
+import org.ikropachev.votingspringboot.web.AuthUser;
 
 import java.util.Optional;
+
+import static org.ikropachev.votingspringboot.util.UserUtil.PASSWORD_ENCODER;
 
 @Configuration
 @EnableWebSecurity
@@ -31,19 +32,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserRepository userRepository;
 
+    @Autowired
+    private void setMapper(ObjectMapper objectMapper) {
+        JsonUtil.setMapper(objectMapper);
+    }
+
     @Bean
-    public UserDetailsService userDetailsService() {
-        return email -> {
-            log.debug("Authenticating '{}'", email);
-            Optional<User> optionalUser = userRepository.getByEmail(email);
-            return new AuthUser(optionalUser.orElseThrow(
-                    () -> new UsernameNotFoundException("User '" + email + "' was not found")));
-        };
+    @Override
+    public UserDetailsService userDetailsServiceBean() throws Exception {
+        return super.userDetailsServiceBean();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService())
+        auth.userDetailsService(
+                        email -> {
+                            log.debug("Authenticating '{}'", email);
+                            Optional<User> optionalUser = userRepository.findByEmailIgnoreCase(email);
+                            return new AuthUser(optionalUser.orElseThrow(
+                                    () -> new UsernameNotFoundException("User '" + email + "' was not found")));
+                        })
                 .passwordEncoder(PASSWORD_ENCODER);
     }
 

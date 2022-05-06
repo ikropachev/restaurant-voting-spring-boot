@@ -1,9 +1,9 @@
-package org.ikropachev.votingspringboot.web.user;
+package org.ikropachev.votingspringboot.web;
 
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.lang.NonNull;
 import org.ikropachev.votingspringboot.model.User;
+import org.springframework.lang.NonNull;
 
 @Getter
 @ToString(of = "user")
