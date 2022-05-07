@@ -6,3 +6,9 @@ INSERT INTO USER_ROLE (ROLE, USER_ID)
 VALUES ('USER', 1),
        ('ADMIN', 2),
        ('USER', 2);
+
+INSERT INTO RESTAURANTS (NAME)
+VALUES ('BarZero'),
+       ('Burgers'),
+       ('HappyShaverma'),
+       ('Suluguni');
