@@ -7,12 +7,13 @@ import org.ikropachev.votingspringboot.HasId;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.io.Serial;
 import java.io.Serializable;
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
-@Table(name = "restaurants")
+@Table(name = "restaurant", uniqueConstraints = {@UniqueConstraint(name = "restaurant_unique_name_idx", columnNames = {"name"})})
 @Getter
 @Setter
 //@AllArgsConstructor(access = AccessLevel.PUBLIC)
