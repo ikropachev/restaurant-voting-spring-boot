@@ -34,12 +34,11 @@ VALUES ('Hachapuri po imeretinski', 550, 3),
        ('Hachapuri po megrelski', 450, 6),
        ('Meat Burger', 100, 4);
 
-INSERT INTO VOTE (user_id, restaurant_id, created_on)
+INSERT INTO VOTE (USER_ID, RESTAURANT_ID, CREATED_ON)
 VALUES (1, 1, '2021-12-02'),
        (1, 2, '2021-12-03'),
-       (2, 3, '2021-11-16'),
-       (2, 4, '2021-11-17');
+       (2, 3, '2021-12-02'),
+       (2, 4, '2021-12-03');
 
-INSERT INTO VOTE (user_id, restaurant_id)
-VALUES (1, 1),
-       (2, 2);
+INSERT INTO VOTE (USER_ID, RESTAURANT_ID)
+VALUES (1, 1);
