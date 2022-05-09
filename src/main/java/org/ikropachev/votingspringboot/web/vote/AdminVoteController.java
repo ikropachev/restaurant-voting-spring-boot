@@ -26,12 +26,6 @@ public class AdminVoteController extends AbstractVoteController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Vote createWithLocation(@RequestParam(value = "restaurant-id") int restaurantId) {
-        log.info("create/update vote from user with id {}", authId());
-        checkTime(LocalTime.now());
-        Vote previous = voteRepository.getByUserIdAndDate(authId(), LocalDate.now());
-        previous.setUserId(authId());
-        previous.setRestaurantId(restaurantId);
-        previous.setDate(LocalDate.now());
-        return voteRepository.save(previous);
+        return super.save(restaurantId);
     }
 }

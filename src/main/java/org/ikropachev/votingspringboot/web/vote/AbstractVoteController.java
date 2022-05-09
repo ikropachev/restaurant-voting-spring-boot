@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.util.List;
 
 import static org.ikropachev.votingspringboot.util.CheckTimeUtil.checkTime;
+import static org.ikropachev.votingspringboot.web.SecurityUtil.authId;
 
 @Slf4j
 public class AbstractVoteController {
@@ -17,9 +18,15 @@ public class AbstractVoteController {
     @Autowired
     protected VoteRepository voteRepository;
 
-    //For tests from API
-    public List<Vote> getAll() {
-        log.info("get all votes");
-        return voteRepository.findAll();
+    public Vote save(int restaurantId){
+        log.info("create/update vote from user with id {}", authId());
+        checkTime(LocalTime.now());
+        Vote previous = voteRepository.getByUserIdAndDate(authId(), LocalDate.now());
+        if (previous == null) {
+            return voteRepository.save(new Vote(authId(), restaurantId, LocalDate.now()));
+        } else {
+            previous.setRestaurantId(restaurantId);
+            return voteRepository.save(previous);
+        }
     }
 }

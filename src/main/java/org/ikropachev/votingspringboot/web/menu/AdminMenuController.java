@@ -62,7 +62,6 @@ public class AdminMenuController extends AbstractMenuController {
         if (dishes != null) {
             dishes.forEach(dish -> dish.setId(null));
         }
-
         if (menu.getDate() == null) {
             menu.setDate(LocalDate.now());
             log.info("set date {} for menu", menu.getDate());

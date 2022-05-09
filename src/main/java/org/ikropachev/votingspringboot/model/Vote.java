@@ -46,4 +46,10 @@ public class Vote extends BaseEntity implements HasId, Serializable {
         this.restaurantId = restaurantId;
         this.date = date;
     }
+
+    public Vote(int userId, int restaurantId, LocalDate date) {
+        this.userId = userId;
+        this.restaurantId = restaurantId;
+        this.date = date;
+    }
 }
