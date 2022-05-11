@@ -3,6 +3,7 @@ package org.ikropachev.votingspringboot.web.menu;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.ikropachev.votingspringboot.View;
 import org.ikropachev.votingspringboot.model.Dish;
@@ -27,12 +28,13 @@ import static org.ikropachev.votingspringboot.web.restaurant.AbstractRestaurantC
 @RestController
 @RequestMapping(value = AdminMenuController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
+@Tag(name = "Admin menu controller", description = "Operations for menus from admin")
 public class AdminMenuController extends AbstractMenuController {
     static final String REST_URL = "/api/admin/restaurants";
 
     @Override
     @GetMapping("/menus")
-    @Operation(description = "View a list of all menus")
+    @Operation(summary = "View a list of all menus")
     public List<Menu> getAll() {
         log.info("getAll");
         return super.getAll();
@@ -40,7 +42,7 @@ public class AdminMenuController extends AbstractMenuController {
 
     @Override
     @GetMapping(value = "/menus/by-date")
-    @Operation(description = "View a list of all menus")
+    @Operation(summary = "View a list of all menus")
     public List<Menu> getAllByDate(@Nullable @RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                                        @Parameter(description = "null for current date", example = DATE_STR, required = false) LocalDate date) {
         log.info("get all menus by date {}", date);
@@ -54,7 +56,7 @@ public class AdminMenuController extends AbstractMenuController {
     @Override
     @DeleteMapping("/{restaurantId}/menus/{menuId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(description = "Delete a menu by restaurant id and menu id")
+    @Operation(summary = "Delete a menu by restaurant id and menu id")
     public void delete(@PathVariable @Parameter(example = RESTAURANT1_ID_STR, required = true) Integer restaurantId,
                        @PathVariable @Parameter(example = MENU1_ID_STR, required = true) Integer menuId) {
         log.info("delete menu with id {} for restaurant with id {}", menuId, restaurantId);
@@ -62,7 +64,7 @@ public class AdminMenuController extends AbstractMenuController {
     }
 
     @PostMapping(value = "/{restaurantId}/menus", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(description = "Create a menu")
+    @Operation(summary = "Create a menu")
     public ResponseEntity<Menu> createWithLocation(@Validated(View.Web.class) @RequestBody
                                                        @Parameter(description = "\"restaurant\" field in request body may absent, " +
                                                                "it doesn't use in request.")Menu menu,
@@ -86,7 +88,7 @@ public class AdminMenuController extends AbstractMenuController {
     }
 
     @PutMapping(value = "/{restaurantId}/menus/{menuId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(description = "Update a menu for a restaurant for a certain date")
+    @Operation(summary = "Update a menu for a restaurant for a certain date")
     public void update(@Validated(View.Web.class) @RequestBody Menu menu,
                        @PathVariable @Parameter(example = RESTAURANT1_ID_STR, required = true) Integer restaurantId,
                        @PathVariable @Parameter(example = MENU1_ID_STR, required = true) Integer menuId) {

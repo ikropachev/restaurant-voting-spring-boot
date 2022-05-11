@@ -1,6 +1,7 @@
 package org.ikropachev.votingspringboot.to;
 
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.EqualsAndHashCode;
 import lombok.Value;
 import org.ikropachev.votingspringboot.HasIdAndEmail;
@@ -17,12 +18,12 @@ public class UserTo extends NamedTo implements HasIdAndEmail {
     @NotBlank
     @Size(max = 128)
     @NoHtml  // https://stackoverflow.com/questions/17480809
-    @Parameter(example = "new-user@gmail.com")
+    @Schema(example = "new-user@gmail.com")
     String email;
 
     @NotBlank
     @Size(min = 5, max = 32)
-    @Parameter(example = "new-password")
+    @Schema(example = "new-password")
     String password;
 
     public UserTo(Integer id, String name, String email, String password) {

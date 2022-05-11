@@ -3,6 +3,7 @@ package org.ikropachev.votingspringboot.web.user;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import static org.ikropachev.votingspringboot.util.validation.ValidationUtil.che
 @RestController
 @RequestMapping(value = AdminUserController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
+@Tag(name = "Admin user controller", description = "Operations for users from admin")
 public class AdminUserController extends AbstractUserController {
 
     static final String REST_URL = "/api/admin/users";
@@ -32,7 +34,7 @@ public class AdminUserController extends AbstractUserController {
 
     @Override
     @GetMapping("/{id}")
-    @Operation(description = "View the user by id")
+    @Operation(summary = "View the user by id")
     public ResponseEntity<User> get(@PathVariable @Parameter(example = USER_ID_STR, required = true) int id) {
         return super.get(id);
     }
@@ -40,20 +42,20 @@ public class AdminUserController extends AbstractUserController {
     @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(description = "Delete the user by id")
+    @Operation(summary = "Delete the user by id")
     public void delete(@PathVariable @Parameter(example = USER_FOR_DELETE_ID_STR, required = true) int id) {
         super.delete(id);
     }
 
     @GetMapping
-    @Operation(description = "View a list of all users")
+    @Operation(summary = "View a list of all users")
     public List<User> getAll() {
         log.info("getAll");
         return repository.findAll(Sort.by(Sort.Direction.ASC, "name", "email"));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(description = "Create the user")
+    @Operation(summary = "Create the user")
     public ResponseEntity<User> createWithLocation(@Valid @RequestBody User user) {
         log.info("create {}", user);
         checkNew(user);
@@ -66,7 +68,7 @@ public class AdminUserController extends AbstractUserController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(description = "Update the user by id")
+    @Operation(summary = "Update the user by id")
     public void update(@Valid @RequestBody User user,
                        @PathVariable @Parameter(example = USER_FOR_UPDATE_ID_STR, required = true) int id) {
         log.info("update {} with id={}", user, id);
@@ -75,7 +77,7 @@ public class AdminUserController extends AbstractUserController {
     }
 
     @GetMapping("/by-email")
-    @Operation(description = "View the user by e-mail")
+    @Operation(summary = "View the user by e-mail")
     public ResponseEntity<User> getByEmail(@RequestParam @Parameter(example = "user@gmail.com", required = true) String email) {
         log.info("getByEmail {}", email);
         return ResponseEntity.of(repository.findByEmailIgnoreCase(email));
@@ -84,7 +86,7 @@ public class AdminUserController extends AbstractUserController {
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
-    @Operation(description = "Set enable status for the user")
+    @Operation(summary = "Set enable status for the user")
     public void enable(@PathVariable @Parameter(example = USER_FOR_UPDATE_ID_STR, required = true) int id,
                        @RequestParam @Parameter(example = "false", required = true) boolean enabled) {
         log.info(enabled ? "enable {}" : "disable {}", id);

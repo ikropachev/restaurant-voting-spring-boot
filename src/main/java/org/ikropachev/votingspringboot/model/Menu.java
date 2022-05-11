@@ -33,7 +33,7 @@ public class Menu extends BaseEntity {
     private Restaurant restaurant;
 
     @Column(name = "created_on", columnDefinition = "date default now()")
-    @Parameter(example = "null")
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY, example = "null")
     private LocalDate date;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu", cascade = {CascadeType.ALL}, orphanRemoval = true)

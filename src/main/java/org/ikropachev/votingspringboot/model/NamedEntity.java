@@ -1,6 +1,7 @@
 package org.ikropachev.votingspringboot.model;
 
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public abstract class NamedEntity extends BaseEntity {
     @Size(min = 2, max = 128)
     @Column(name = "name", nullable = false)
     @NoHtml
-    @Parameter(example = "name")
+    @Schema(example = "name")
     protected String name;
 
     protected NamedEntity(Integer id, String name) {

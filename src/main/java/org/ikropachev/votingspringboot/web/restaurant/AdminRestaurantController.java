@@ -38,20 +38,20 @@ public class AdminRestaurantController extends AbstractRestaurantController {
     @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(description = "Delete a restaurant by id")
+    @Operation(summary = "Delete a restaurant by id")
     public void delete(@PathVariable @Parameter(example = RESTAURANT1_ID_STR, required = true) int id) {
         super.delete(id);
     }
 
     @GetMapping
-    @Operation(description = "View a list of all restaurants")
+    @Operation(summary = "View a list of all restaurants")
     public List<Restaurant> getAll() {
         log.info("getAll");
         return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    @Operation(description = "Create a restaurant")
+    @Operation(summary = "Create a restaurant")
     public ResponseEntity<Restaurant> createWithLocation(@Valid @RequestBody Restaurant restaurant) {
         log.info("create {}", restaurant);
         checkNew(restaurant);
@@ -64,7 +64,7 @@ public class AdminRestaurantController extends AbstractRestaurantController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @Operation(description = "Update a restaurant")
+    @Operation(summary = "Update a restaurant")
     public void update(@Valid @RequestBody Restaurant restaurant, @PathVariable int id) {
         log.info("update {} with id={}", restaurant, id);
         assureIdConsistent(restaurant, id);
