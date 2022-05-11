@@ -2,6 +2,7 @@ package org.ikropachev.votingspringboot.web.menu;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ikropachev.votingspringboot.model.Menu;
+import org.ikropachev.votingspringboot.repository.DishRepository;
 import org.ikropachev.votingspringboot.repository.MenuRepository;
 import org.ikropachev.votingspringboot.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class AbstractMenuController {
 
     @Autowired
     protected RestaurantRepository restaurantRepository;
+
+    @Autowired
+    protected DishRepository dishRepository;
 
     public Menu get(int id) {
         log.info("get menu with id {}", id);
@@ -54,6 +58,7 @@ public class AbstractMenuController {
 
     public void delete(Integer id, Integer restaurantId) {
         log.info("delete menu with id {} for restaurant with id {}", id, restaurantId);
+        dishRepository.delete(id);  //fix referential integrity constraint violation exception
         menuRepository.delete(id, restaurantId);
     }
 

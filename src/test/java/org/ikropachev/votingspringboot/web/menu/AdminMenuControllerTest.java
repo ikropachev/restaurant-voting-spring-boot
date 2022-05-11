@@ -50,14 +50,14 @@ public class AdminMenuControllerTest extends AbstractControllerTest {
     void deleteNotFound() throws Exception {
         perform(MockMvcRequestBuilders.delete(REST_URL + RESTAURANT1_ID + "/menus/" + NOT_FOUND))
                 .andDo(print())
-                .andExpect(status().isUnprocessableEntity());
+                .andExpect(status().isNoContent());
     }
 
     @Test
     @WithUserDetails(value = ADMIN_MAIL)
     void createWithLocation() throws Exception {
         Menu newMenu = getNew();
-        ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL)
+        ResultActions action = perform(MockMvcRequestBuilders.post(REST_URL + RESTAURANT1_ID + "/menus")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(newMenu)))
                 .andExpect(status().isCreated());
@@ -74,11 +74,11 @@ public class AdminMenuControllerTest extends AbstractControllerTest {
     void update() throws Exception {
         Menu updated = getUpdated();
         //updated.setId(null);
-        perform(MockMvcRequestBuilders.put(REST_URL + MENU1_ID)
+        perform(MockMvcRequestBuilders.put(REST_URL + RESTAURANT1_ID + "/menus/" + MENU1_ID)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.writeValue(updated)))
                 .andDo(print())
-                .andExpect(status().isNoContent());
+                .andExpect(status().isOk());
 
         MENU_MATCHER.assertMatch(menuRepository.getById(MENU1_ID), getUpdated());
     }
