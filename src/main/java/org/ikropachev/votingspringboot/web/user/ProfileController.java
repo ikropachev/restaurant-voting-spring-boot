@@ -1,5 +1,7 @@
 package org.ikropachev.votingspringboot.web.user;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -26,18 +28,21 @@ public class ProfileController extends AbstractUserController {
     static final String REST_URL = "/api/profile";
 
     @GetMapping
+    @Operation(description = "Get the authenticated user information")
     public User get(@AuthenticationPrincipal AuthUser authUser) {
         return authUser.getUser();
     }
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(description = "Delete the authenticated user")
     public void delete(@AuthenticationPrincipal AuthUser authUser) {
         super.delete(authUser.id());
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
+    @Operation(description = "User registration")
     public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {
         log.info("register {}", userTo);
         checkNew(userTo);
@@ -50,6 +55,7 @@ public class ProfileController extends AbstractUserController {
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Transactional
+    @Operation(description = "Update the authenticated user")
     public void update(@RequestBody @Valid UserTo userTo, @AuthenticationPrincipal AuthUser authUser) {
         assureIdConsistent(userTo, authUser.id());
         User user = authUser.getUser();

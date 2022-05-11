@@ -1,5 +1,9 @@
 package org.ikropachev.votingspringboot.web.restaurant;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.ikropachev.votingspringboot.model.Restaurant;
 import org.springframework.data.domain.Sort;
@@ -19,30 +23,35 @@ import static org.ikropachev.votingspringboot.util.validation.ValidationUtil.che
 @RestController
 @RequestMapping(value = AdminRestaurantController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 @Slf4j
+@Tag(name = "Admin restaurant controller", description = "Operations for restaurants from admin")
 public class AdminRestaurantController extends AbstractRestaurantController {
 
     static final String REST_URL = "/api/admin/restaurants";
 
     @Override
     @GetMapping("/{id}")
-    public ResponseEntity<Restaurant> get(@PathVariable int id) {
+    @Operation(summary = "View a restaurant by id")
+    public ResponseEntity<Restaurant> get(@PathVariable @Parameter(example = RESTAURANT1_ID_STR, required = true) int id) {
         return super.get(id);
     }
 
     @Override
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable int id) {
+    @Operation(description = "Delete a restaurant by id")
+    public void delete(@PathVariable @Parameter(example = RESTAURANT1_ID_STR, required = true) int id) {
         super.delete(id);
     }
 
     @GetMapping
+    @Operation(description = "View a list of all restaurants")
     public List<Restaurant> getAll() {
         log.info("getAll");
         return repository.findAll(Sort.by(Sort.Direction.ASC, "name"));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @Operation(description = "Create a restaurant")
     public ResponseEntity<Restaurant> createWithLocation(@Valid @RequestBody Restaurant restaurant) {
         log.info("create {}", restaurant);
         checkNew(restaurant);
@@ -55,6 +64,7 @@ public class AdminRestaurantController extends AbstractRestaurantController {
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(description = "Update a restaurant")
     public void update(@Valid @RequestBody Restaurant restaurant, @PathVariable int id) {
         log.info("update {} with id={}", restaurant, id);
         assureIdConsistent(restaurant, id);

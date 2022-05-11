@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 
 @Slf4j
 public class AbstractRestaurantController {
+    public static final String RESTAURANT1_ID_STR = "1";
 
     @Autowired
     protected RestaurantRepository repository;

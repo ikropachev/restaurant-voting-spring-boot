@@ -1,6 +1,8 @@
 package org.ikropachev.votingspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,6 +24,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Menu extends BaseEntity {
+    private static final String DISH_LIST_STR = "[\n{\n\"id\": \"null\",\n\"name\": \"dish1\",\n\"price\": 10\n},\n" +
+            "    {\n\"id\": \"null\",\n\"name\": \"dish2\",\n\"price\": 20\n}\n]";
 
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
@@ -29,10 +33,12 @@ public class Menu extends BaseEntity {
     private Restaurant restaurant;
 
     @Column(name = "created_on", columnDefinition = "date default now()")
+    @Parameter(example = "null")
     private LocalDate date;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu", cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JsonManagedReference
+    @Schema(example = DISH_LIST_STR)
     private List<Dish> dishes;
 
     public Menu(Integer id, Restaurant restaurant, LocalDate date, List<Dish> dishes) {

@@ -13,6 +13,10 @@ import static org.ikropachev.votingspringboot.util.validation.ValidationUtil.che
 
 @Slf4j
 public class AbstractMenuController {
+    public static final String MENU1_ID_STR = "1";
+    protected static final String DATE_STR = "2021-12-03";
+    public static final String TODAY_MENU_ID_STR = "5";
+
     @Autowired
     protected MenuRepository menuRepository;
 

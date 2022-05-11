@@ -1,6 +1,7 @@
 package org.ikropachev.votingspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +38,7 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @NotBlank
     @Size(max = 128)
     @NoHtml   // https://stackoverflow.com/questions/17480809
+    @Parameter(example = "example@gmail.com")
     private String email;
 
     @Column(name = "password", nullable = false)
@@ -44,9 +46,11 @@ public class User extends NamedEntity implements HasIdAndEmail, Serializable {
     @Size(max = 256)
     // https://stackoverflow.com/a/12505165/548473
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Parameter(example = "password")
     private String password;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
+    @Parameter(example = "true")
     private boolean enabled = true;
 
     @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
