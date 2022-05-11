@@ -17,7 +17,7 @@ Voting system for deciding where to have lunch (without frontend).
 * Each restaurant provides a new menu each day.
 
 Tech stack: Maven, Spring Boot, Spring Security, Spring Data JPA, REST (Jackson), JDK17, <br>
-Stream API, H2 database (in memory),  Swagger (API)
+Stream API, H2 database (in memory),  Swagger v3 (API)
 
 Login information:
 * admin@gmail.com:admin - sign in like admin
