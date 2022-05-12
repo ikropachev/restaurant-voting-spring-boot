@@ -19,10 +19,6 @@ public interface MenuRepository extends BaseRepository<Menu> {
     @Query("DELETE FROM Menu m WHERE m.id=:id AND m.restaurant.id=:restaurantId")
     int delete(@Param("id") int id, @Param("restaurantId") int restaurantId);
 
-    @Transactional
-    @Query("DELETE FROM Menu m WHERE m.restaurant.id=:restaurantId")
-    int delete(@Param("restaurantId") int restaurantId);
-
     @EntityGraph(attributePaths = {"dishes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m WHERE m.date=:date ORDER BY m.restaurant.name")
     List<Menu> getAllByDate(@Param("date") LocalDate date);
@@ -34,7 +30,4 @@ public interface MenuRepository extends BaseRepository<Menu> {
     @EntityGraph(attributePaths = {"dishes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT m FROM Menu m")
     List<Menu> findAll();
-
-    @Query("SELECT m FROM Menu m WHERE m.restaurant.id=:restaurantId")
-    List<Menu> findAllByRestaurantId(@Param("restaurantId") int restaurantId);
 }

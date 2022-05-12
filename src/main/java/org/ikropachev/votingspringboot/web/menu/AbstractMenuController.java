@@ -24,9 +24,6 @@ public class AbstractMenuController {
     @Autowired
     protected RestaurantRepository restaurantRepository;
 
-    @Autowired
-    protected DishRepository dishRepository;
-
     public Menu get(int id) {
         log.info("get menu with id {}", id);
         return menuRepository.getWithDishes(id);
@@ -58,7 +55,6 @@ public class AbstractMenuController {
 
     public void delete(Integer id, Integer restaurantId) {
         log.info("delete menu with id {} for restaurant with id {}", id, restaurantId);
-        dishRepository.delete(id);  //fix referential integrity constraint violation exception
         menuRepository.delete(id, restaurantId);
     }
 
