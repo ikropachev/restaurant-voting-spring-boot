@@ -1,13 +1,13 @@
 package org.ikropachev.votingspringboot.web.user;
 
 import lombok.extern.slf4j.Slf4j;
+import org.ikropachev.votingspringboot.model.User;
+import org.ikropachev.votingspringboot.repository.UserRepository;
+import org.ikropachev.votingspringboot.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.ikropachev.votingspringboot.model.User;
-import org.ikropachev.votingspringboot.repository.UserRepository;
-import org.ikropachev.votingspringboot.util.UserUtil;
 
 @Slf4j
 public abstract class AbstractUserController {

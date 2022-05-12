@@ -2,7 +2,6 @@ package org.ikropachev.votingspringboot.web.vote;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.ikropachev.votingspringboot.model.Vote;
@@ -12,11 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import static org.ikropachev.votingspringboot.util.CheckTimeUtil.checkTime;
-import static org.ikropachev.votingspringboot.web.SecurityUtil.authId;
 import static org.ikropachev.votingspringboot.web.restaurant.AbstractRestaurantController.RESTAURANT1_ID_STR;
 
 @RestController
@@ -29,7 +23,7 @@ public class UserVoteController extends AbstractVoteController {
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create/update a vote for a restaurant")
     public Vote createWithLocation(@RequestParam(value = "restaurant-id")
-                                       @Parameter(example = RESTAURANT1_ID_STR, required = true) int restaurantId) {
+                                   @Parameter(example = RESTAURANT1_ID_STR, required = true) int restaurantId) {
         return super.save(restaurantId);
     }
 }

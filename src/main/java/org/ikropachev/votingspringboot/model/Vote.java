@@ -16,7 +16,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "vote", uniqueConstraints = {@UniqueConstraint(name = "vote_user_id_created_on_idx", columnNames = {"user_id", "created_on"})})
+@Table(name = "vote", uniqueConstraints = {@UniqueConstraint(name = "vote_user_id_created_on_idx",
+        columnNames = {"user_id", "created_on"})})
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

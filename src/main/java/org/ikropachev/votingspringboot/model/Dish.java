@@ -1,7 +1,6 @@
 package org.ikropachev.votingspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Getter;

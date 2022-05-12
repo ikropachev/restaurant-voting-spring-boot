@@ -1,6 +1,5 @@
 package org.ikropachev.votingspringboot.model;
 
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -12,7 +11,6 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
 
 @MappedSuperclass
 @Getter

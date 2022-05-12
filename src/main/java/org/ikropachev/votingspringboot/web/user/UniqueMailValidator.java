@@ -1,13 +1,13 @@
 package org.ikropachev.votingspringboot.web.user;
 
 import lombok.AllArgsConstructor;
+import org.ikropachev.votingspringboot.HasIdAndEmail;
+import org.ikropachev.votingspringboot.repository.UserRepository;
+import org.ikropachev.votingspringboot.web.SecurityUtil;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.ikropachev.votingspringboot.HasIdAndEmail;
-import org.ikropachev.votingspringboot.repository.UserRepository;
-import org.ikropachev.votingspringboot.web.SecurityUtil;
 
 import javax.servlet.http.HttpServletRequest;
 

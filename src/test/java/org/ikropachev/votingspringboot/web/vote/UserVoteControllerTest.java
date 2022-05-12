@@ -13,11 +13,10 @@ import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.ikropachev.votingspringboot.util.CheckTimeUtil.*;
-import static org.ikropachev.votingspringboot.util.CheckTimeUtil.MODE_DEFAULT;
 import static org.ikropachev.votingspringboot.web.restaurant.RestaurantTestData.RESTAURANT1_ID;
-import static org.ikropachev.votingspringboot.web.user.UserTestData.ADMIN_MAIL;
 import static org.ikropachev.votingspringboot.web.user.UserTestData.USER_MAIL;
-import static org.ikropachev.votingspringboot.web.vote.VoteTestData.*;
+import static org.ikropachev.votingspringboot.web.vote.VoteTestData.VOTE_MATCHER;
+import static org.ikropachev.votingspringboot.web.vote.VoteTestData.getNewForAdmin;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //Check time in CheckTimeUtil before test

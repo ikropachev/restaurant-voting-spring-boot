@@ -1,11 +1,11 @@
 package org.ikropachev.votingspringboot.util;
 
 import lombok.experimental.UtilityClass;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.ikropachev.votingspringboot.model.Role;
 import org.ikropachev.votingspringboot.model.User;
 import org.ikropachev.votingspringboot.to.UserTo;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @UtilityClass
 public class UserUtil {

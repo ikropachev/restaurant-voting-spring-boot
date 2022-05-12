@@ -1,6 +1,9 @@
 package org.ikropachev.votingspringboot.model;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.ikropachev.votingspringboot.HasId;
@@ -13,7 +16,8 @@ import java.io.Serializable;
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
-@Table(name = "restaurant", uniqueConstraints = {@UniqueConstraint(name = "restaurant_unique_name_idx", columnNames = {"name"})})
+@Table(name = "restaurant", uniqueConstraints = {@UniqueConstraint(name = "restaurant_unique_name_idx",
+        columnNames = {"name"})})
 @Getter
 @Setter
 //@AllArgsConstructor(access = AccessLevel.PUBLIC)

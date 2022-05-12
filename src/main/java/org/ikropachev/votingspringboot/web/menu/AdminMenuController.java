@@ -2,14 +2,11 @@ package org.ikropachev.votingspringboot.web.menu;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.ikropachev.votingspringboot.View;
 import org.ikropachev.votingspringboot.model.Dish;
 import org.ikropachev.votingspringboot.model.Menu;
-import org.ikropachev.votingspringboot.model.User;
-import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -44,7 +41,8 @@ public class AdminMenuController extends AbstractMenuController {
     @GetMapping(value = "/menus/by-date")
     @Operation(summary = "View a list of all menus")
     public List<Menu> getAllByDate(@Nullable @RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-                                       @Parameter(description = "null for current date", example = DATE_STR, required = false) LocalDate date) {
+                                   @Parameter(description = "null for current date", example = DATE_STR, required = false)
+                                   LocalDate date) {
         log.info("get all menus by date {}", date);
         if (date == null) {
             date = LocalDate.now();
@@ -63,12 +61,14 @@ public class AdminMenuController extends AbstractMenuController {
         super.delete(menuId, restaurantId);
     }
 
-    @PostMapping(value = "/{restaurantId}/menus", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{restaurantId}/menus",
+            consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Create a menu")
     public ResponseEntity<Menu> createWithLocation(@Validated(View.Web.class) @RequestBody
-                                                       @Parameter(description = "\"restaurant\" field in request body may absent, " +
-                                                               "it doesn't use in request.")Menu menu,
-                                                   @PathVariable @Parameter(example = RESTAURANT1_ID_STR, required = true) Integer restaurantId) {
+                                                   @Parameter(description = "\"restaurant\" field in request body may absent, " +
+                                                           "it doesn't use in request.") Menu menu,
+                                                   @PathVariable @Parameter(example = RESTAURANT1_ID_STR, required = true)
+                                                   Integer restaurantId) {
         log.info("create {} for restaurant {}", menu, restaurantId);
 
         //Fix bug with lost dishes if dish_id not null (dishes always new)

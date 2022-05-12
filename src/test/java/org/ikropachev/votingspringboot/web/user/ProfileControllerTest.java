@@ -1,25 +1,25 @@
 package org.ikropachev.votingspringboot.web.user;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithUserDetails;
-import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.ikropachev.votingspringboot.model.User;
 import org.ikropachev.votingspringboot.repository.UserRepository;
 import org.ikropachev.votingspringboot.to.UserTo;
 import org.ikropachev.votingspringboot.util.JsonUtil;
 import org.ikropachev.votingspringboot.util.UserUtil;
 import org.ikropachev.votingspringboot.web.AbstractControllerTest;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithUserDetails;
+import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.ikropachev.votingspringboot.web.user.ProfileController.REST_URL;
 import static org.ikropachev.votingspringboot.web.user.UniqueMailValidator.EXCEPTION_DUPLICATE_EMAIL;
 import static org.ikropachev.votingspringboot.web.user.UserTestData.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class ProfileControllerTest extends AbstractControllerTest {
 

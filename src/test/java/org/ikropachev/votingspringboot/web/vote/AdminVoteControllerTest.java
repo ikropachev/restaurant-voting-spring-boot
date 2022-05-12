@@ -1,6 +1,5 @@
 package org.ikropachev.votingspringboot.web.vote;
 
-import org.aspectj.lang.annotation.Before;
 import org.ikropachev.votingspringboot.model.Vote;
 import org.ikropachev.votingspringboot.repository.VoteRepository;
 import org.ikropachev.votingspringboot.util.CheckTimeUtil;

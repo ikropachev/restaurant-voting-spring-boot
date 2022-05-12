@@ -11,7 +11,6 @@ public class RestaurantTestData {
 
     public static final int RESTAURANT1_ID = 1;
     public static final int NOT_FOUND = 100;
-    //public static final String RESTAURANT2_NAME = "Burgers";
 
     public static final Restaurant restaurant1 = new Restaurant(RESTAURANT1_ID, "BarZero");
     public static final Restaurant restaurant2 = new Restaurant(RESTAURANT1_ID + 1, "Burgers");

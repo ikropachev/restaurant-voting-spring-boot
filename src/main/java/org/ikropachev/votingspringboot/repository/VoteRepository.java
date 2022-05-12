@@ -11,7 +11,7 @@ import java.util.List;
 
 @Transactional(readOnly = true)
 @Tag(name = "Vote Controller")
-public interface VoteRepository extends BaseRepository<Vote>{
+public interface VoteRepository extends BaseRepository<Vote> {
     @Query("SELECT v FROM Vote v ORDER BY v.date DESC")
     List<Vote> findAll();
 

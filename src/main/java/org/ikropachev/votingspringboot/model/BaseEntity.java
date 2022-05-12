@@ -1,14 +1,12 @@
 package org.ikropachev.votingspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
-
 import lombok.*;
+import org.ikropachev.votingspringboot.HasId;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.util.ProxyUtils;
 import org.springframework.util.Assert;
-import org.ikropachev.votingspringboot.HasId;
 
 import javax.persistence.*;
 

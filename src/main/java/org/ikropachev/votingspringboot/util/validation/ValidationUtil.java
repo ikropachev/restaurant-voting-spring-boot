@@ -1,10 +1,10 @@
 package org.ikropachev.votingspringboot.util.validation;
 
 import lombok.experimental.UtilityClass;
-import org.springframework.core.NestedExceptionUtils;
-import org.springframework.lang.NonNull;
 import org.ikropachev.votingspringboot.HasId;
 import org.ikropachev.votingspringboot.error.IllegalRequestDataException;
+import org.springframework.core.NestedExceptionUtils;
+import org.springframework.lang.NonNull;
 
 @UtilityClass
 public class ValidationUtil {

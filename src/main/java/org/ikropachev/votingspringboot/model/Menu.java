@@ -1,7 +1,6 @@
 package org.ikropachev.votingspringboot.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -19,7 +18,8 @@ import java.util.List;
 
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 @Entity
-@Table(name = "menu", uniqueConstraints = {@UniqueConstraint(name = "menu_restaurant_id_created_on_idx", columnNames = {"restaurant_id", "created_on"})})
+@Table(name = "menu", uniqueConstraints = {@UniqueConstraint(name = "menu_restaurant_id_created_on_idx",
+        columnNames = {"restaurant_id", "created_on"})})
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

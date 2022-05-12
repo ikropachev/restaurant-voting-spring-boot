@@ -2,7 +2,6 @@ package org.ikropachev.votingspringboot.web.menu;
 
 import lombok.extern.slf4j.Slf4j;
 import org.ikropachev.votingspringboot.model.Menu;
-import org.ikropachev.votingspringboot.repository.DishRepository;
 import org.ikropachev.votingspringboot.repository.MenuRepository;
 import org.ikropachev.votingspringboot.repository.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
