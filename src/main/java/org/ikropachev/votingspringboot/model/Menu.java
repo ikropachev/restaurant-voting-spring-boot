@@ -30,7 +30,7 @@ public class Menu extends BaseEntity {
     @NotNull
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "restaurant_id", nullable = false)
-    //@OnDelete(action = OnDeleteAction.CASCADE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
     @Column(name = "created_on", columnDefinition = "date default now()")
@@ -40,6 +40,7 @@ public class Menu extends BaseEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "menu", cascade = {CascadeType.ALL}, orphanRemoval = true)
     @JsonManagedReference
     @Schema(example = DISH_LIST_STR)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Dish> dishes;
 
     public Menu(Integer id, Restaurant restaurant, LocalDate date, List<Dish> dishes) {
