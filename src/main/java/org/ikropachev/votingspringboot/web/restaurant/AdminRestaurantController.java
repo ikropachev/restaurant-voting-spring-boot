@@ -64,7 +64,8 @@ public class AdminRestaurantController extends AbstractRestaurantController {
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Update a restaurant")
-    public void update(@Valid @RequestBody Restaurant restaurant, @PathVariable int id) {
+    public void update(@Valid @RequestBody Restaurant restaurant,
+                       @PathVariable @Parameter(example = RESTAURANT1_ID_STR, required = true) int id) {
         log.info("update {} with id={}", restaurant, id);
         assureIdConsistent(restaurant, id);
         restaurantRepository.save(restaurant);
